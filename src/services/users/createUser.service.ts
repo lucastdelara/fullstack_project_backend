@@ -1,10 +1,10 @@
-import { AppDataSource } from "../data-source";
-import { User } from "../entities/user.entity";
+import { AppDataSource } from "../../data-source";
+import { User } from "../../entities/user.entity";
 import {
   IUserRequest,
   IUserResponse,
-} from "../interfaces/user/userInterface";
-import { respUserSchema } from "../schemas/user/schemaUser";
+} from "../../interfaces/user/userInterface";
+import { respUserSchema } from "../../schemas/user/schemaUser";
 
 const createUserService = async (
   date: IUserRequest

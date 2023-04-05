@@ -43,6 +43,12 @@ class User {
 
   @OneToMany(() => Contact, (contacts) => contacts.users)
   contacts: Contact[];
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  hashPassword() {
+    this.password = hashSync(this.password, 10);
+  }
 }
 
 export { User };

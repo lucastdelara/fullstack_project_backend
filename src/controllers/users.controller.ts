@@ -1,20 +1,19 @@
-import { instanceToPlain } from 'class-transformer';
 import { Request, Response } from 'express';
 import {
   IUserLogin,
   IUserRequest,
   IUserUpdate,
 } from '../interfaces/user/userInterface';
-import { createUserService } from '../services/users/createUser.service';
-import { deleteUserService } from '../services/users/deleteUser.service';
-import listUsersService from '../services/users/listUser.service';
-import { listUserIDService } from '../services/users/listUserID.service';
 import { loginUserService } from '../services/users/loginUser.service';
 import updateUserService from '../services/users/updateUser.service';
+import listUsersService from '../services/users/listUser.service';
+import { listUserIDService } from '../services/users/listUserID.service';
+import { createUserService } from '../services/users/createUser.service';
+import { deleteUserService } from '../services/users/deleteUser.service';
 
 const listUsersController = async (req: Request, res: Response) => {
   const users = await listUsersService();
-  return res.status(200).json(instanceToPlain(users));
+  return res.status(200).json(users);
 };
 
 const listUserByIdController = async (req: Request, res: Response) => {

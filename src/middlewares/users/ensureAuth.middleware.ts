@@ -8,7 +8,6 @@ const ensureAuthMiddleware = async (
   next: NextFunction
 ) => {
   let token = req.headers.authorization;
-
   if (!token) {
     return res.status(401).json({
       message: "Invalid token",
@@ -16,7 +15,7 @@ const ensureAuthMiddleware = async (
   }
 
   token = token.split(" ")[1];
-
+ 
   jwt.verify(token, process.env.SECRET_KEY!, (error, decoded: any) => {
     if (error) {
       return res.status(401).json({
@@ -26,12 +25,11 @@ const ensureAuthMiddleware = async (
 
     req.user = {
       id: String(decoded.sub),
-      isStore: decoded.isStore,
-      isActive: decoded.isActive,
+      isActive: decoded.isActive
     };
-
+    
     return next();
   });
 };
 
-export default ensureAuthMiddleware;
+export {ensureAuthMiddleware};

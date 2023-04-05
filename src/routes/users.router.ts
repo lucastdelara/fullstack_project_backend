@@ -6,7 +6,7 @@ import {
   listUsersController,
   updateUserController,
 } from "../controllers/users.controller";
-import ensureAuthMiddleware from "../middlewares/users/ensureAuth.middleware";
+import {ensureAuthMiddleware} from "../middlewares/users/ensureAuth.middleware";
 import { ensureExistsUserMiddleware } from "../middlewares/users/ensureExistsUser.middleware";
 import { ensureExistUserIDMiddleware } from "../middlewares/users/ensureExistUserID.middleware";
 import { userSchema } from "../schemas/user/schemaUser";

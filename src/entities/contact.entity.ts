@@ -21,7 +21,7 @@ class Contact {
   email: string;
 
   @Column()
-  phone: string;
+  contact: string;
 
   @Column({ default: true })
   isActive: boolean;
