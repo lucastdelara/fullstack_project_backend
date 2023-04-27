@@ -36,3 +36,7 @@ export interface IUser {
     password?: string;
     contact?: string;
   }
+  export interface IUserLoginResponse {
+    userResponse: IUser,
+    token: string,
+}

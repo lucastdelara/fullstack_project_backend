@@ -2,10 +2,11 @@ import { compare } from "bcryptjs";
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities/user.entity";
 import { AppError } from "../../errors/appError";
-import { IUserLogin } from "../../interfaces/user/userInterface";
+import { IUserLogin, IUserLoginResponse } from "../../interfaces/user/userInterface";
 import jwt from "jsonwebtoken";
+import { respUserSchema } from "../../schemas/user/schemaUser";
 
-const loginUserService = async ({ email, password }: IUserLogin):Promise<string> => {
+const loginUserService = async ({ email, password }: IUserLogin):Promise<IUserLoginResponse> => {
   const userRepository = AppDataSource.getRepository(User);
 
   const user = await userRepository.findOneBy({ email: email });
@@ -22,8 +23,10 @@ const loginUserService = async ({ email, password }: IUserLogin):Promise<string>
     throw new AppError("Password or email incorrect", 403);
   }
 
-  const tokenUser = jwt.sign(
-    { isActive: user.isActive },
+  const token = jwt.sign(
+    {// { isActive: user.isActive,
+      email: user.email,
+    },
     process.env.SECRET_KEY!,
     {
       subject: user.id,
@@ -31,7 +34,14 @@ const loginUserService = async ({ email, password }: IUserLogin):Promise<string>
     }
   );
   
-  return tokenUser;
+const userResponse = await respUserSchema.validate(
+  user,
+  {
+    stripUnknown:true
+  }
+)
+
+  return { userResponse, token }
 };
 
 export { loginUserService };

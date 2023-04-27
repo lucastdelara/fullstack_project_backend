@@ -7,11 +7,11 @@ import {
 import { respUserSchema } from "../../schemas/user/schemaUser";
 
 const createUserService = async (
-  date: IUserRequest
+  data: IUserRequest
 ): Promise<IUserResponse> => {
   const userRepository = AppDataSource.getRepository(User);
 
-  const createUser = userRepository.create(date);
+  const createUser = userRepository.create(data);
 
   await userRepository.save(createUser);
 

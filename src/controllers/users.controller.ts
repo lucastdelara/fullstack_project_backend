@@ -38,9 +38,9 @@ const createUserController = async (req: Request, res: Response) => {
 };
 
 const loginUserController = async (req: Request, res: Response) => {
-  const loginDate: IUserLogin = req.body;
-  const tokenUser = await loginUserService(loginDate);
-  return res.status(200).json({ tokenUser });
+  const loginDate:IUserLogin = req.body;
+  const user = await loginUserService(loginDate);
+  return res.status(200).json({ user: user.userResponse, token: user.token });
 };
 
 const deleteUserController = async (req: Request, res: Response) => {
