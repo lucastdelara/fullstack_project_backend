@@ -1,12 +1,12 @@
 import * as yup from "yup";
 import { SchemaOf } from "yup";
 import {
+  IUser,
   IUserRequest,
-  IUserResponse,
   IUserUpdate,
 } from "../../interfaces/user/userInterface";
 
-const respUserSchema: SchemaOf<IUserResponse> = yup.object().shape({
+const respUserSchema: yup.SchemaOf<IUser> = yup.object().shape({
   id: yup.string().notRequired(),
   name: yup.string().notRequired(),
   email: yup.string().email().notRequired(),
@@ -18,14 +18,14 @@ const respUserSchema: SchemaOf<IUserResponse> = yup.object().shape({
 
 const listRespUserSchema = yup.array(respUserSchema);
 
-const userSchema: SchemaOf<IUserRequest> = yup.object().shape({
+const userSchema: yup.SchemaOf<IUserRequest> = yup.object().shape({
   name: yup.string().required(),
   email: yup.string().email().required(),
   password: yup.string().required(),
   contact: yup.string().required(),
 });
 
-export const updateSchema: SchemaOf<IUserUpdate> = yup.object().shape({
+export const updateSchema: yup.SchemaOf<IUserUpdate> = yup.object().shape({
   email: yup.string().email().notRequired(),
   name: yup.string().notRequired(),
   password: yup.string().notRequired(),

@@ -5,14 +5,14 @@ import { IContact, IContactRequest } from "../../interfaces/contact/contactInter
 import { respUserSchema } from "../../schemas/user/schemaUser";
 
 const createContactService = async (
-  date: IContactRequest, idUser: string
+  data: IContactRequest, idUser: string
 ): Promise<IContact> => {
   const userRepository = AppDataSource.getRepository(User);
   const contactRepository = AppDataSource.getRepository(Contact);
 
   const findUser = await userRepository.findOneBy({ id: idUser });
   
-  const createContact = contactRepository.create({...date, users: findUser!});
+  const createContact = contactRepository.create({...data, users: findUser!});
   await contactRepository.save(createContact);
 
   const resContact = await respUserSchema.validate(createContact, {
